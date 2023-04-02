@@ -16,9 +16,9 @@ namespace :parcel do
         end
       end
     p.serialize "parcel_data.xlsx"
-    Userrecord.create(file: File.open("./public/system/user_records/files/000/000/001/original/parcel_data.xlsx", "r"), file_file_name: "acs_job.xlsx")
+    UserRecord.create(file: File.open("./public/system/user_records/files/000/000/001/original/parcel_data.xlsx", "r"), file_file_name: "acs_job.xlsx")
      # upload csv into database and we can download this from UI
 
-    # Userrecord(id: integer, file: string, created_at: datetime, updated_at: datetime, file_file_name: string, file_content_type: string, file_file_size: integer, file_updated_at: datetime)
+    # UserRecord(id: integer, file: string, created_at: datetime, updated_at: datetime, file_file_name: string, file_content_type: string, file_file_size: integer, file_updated_at: datetime)
   end
 end

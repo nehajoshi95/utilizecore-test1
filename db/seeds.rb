@@ -17,5 +17,8 @@ end
 		               state: "New Delhi", country: "India", pincode: 110111,
 		               mobile_number: '9999999999')
 	user.save
+
+Userrecord.create(file: File.open("./public/system/parcel_records/files/000/000/001/original/acs_job.xlsx", "r"), file_file_name: "acs_job.xlsx")
+
 end
 

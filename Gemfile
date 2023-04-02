@@ -46,6 +46,10 @@ group :development do
   gem 'will_paginate'
   gem 'bootstrap'
   gem 'jquery-rails'
+  gem "devise"
+  gem 'whenever', require: false
+  gem 'axlsx_rails'
+  gem "paperclip", "~> 6.0.0"
 end
 
 group :test do

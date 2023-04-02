@@ -1,0 +1,29 @@
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Weight</th>
+      <th scope="col">Status</th>
+      <th scope="col">Service Type</th>
+      <th scope="col">Payment Mode</th>
+      <th scope="col">Sender</th>
+      <th scope="col">Receiver</th>
+      <th scope="col">Cost</th>
+      <th scope="col"> ID</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% [@parcel].each do |parcel| %>
+      <tr>
+        <td><%= parcel.weight %></td>
+        <td><%= parcel.status %></td>
+        <td><%= parcel.service_type.name %></td>
+        <td><%= parcel.payment_mode %></td>
+        <td><%= parcel.sender.name %></td>
+        <td><%= parcel.receiver.try(:name) %></td>
+        <td><%= parcel.cost%></td>
+        <td><%= parcel.id%></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

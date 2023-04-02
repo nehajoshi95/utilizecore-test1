@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :user_records
+  get 'download_csv', to: "user_records#download_csv"
+  # devise_for :views
+  # devise_for :admins
+  devise_for :users
   resources :service_types
   resources :parcels
   resources :addresses

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>User Records</h1>
+
+<table>
+  <thead>
+    <tr>
+
+      <th>File Name</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_records.each do |user_record| %>
+      <tr>
+        <td><%= user_record.file_file_name %></td>
+        <td><%= link_to 'Show', user_record %></td>
+        <td><%= link_to 'Edit', edit_user_record_path(user_record) %></td>
+        <td><%= link_to 'Destroy', user_record, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <td><%= link_to "download", download_csv_path(url: user_record.file.path, file_name: user_record.file_file_name) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New User Record', new_user_record_path %>

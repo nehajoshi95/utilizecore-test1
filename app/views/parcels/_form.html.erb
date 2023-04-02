@@ -1,54 +1,91 @@
-<%= form_with(model: parcel) do |form| %>
-  <% if parcel.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(parcel.errors.count, "error") %> prohibited this parcel from being saved:</h2>
+<div class="form", align="center">
+  <%= form_with(model: parcel) do |form| %>
+    <% if parcel.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(parcel.errors.count, "error") %> prohibited this parcel from being saved:</h2>
 
-      <ul>
-        <% parcel.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% parcel.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <br/> <br/>
+    <p><b>PARCEL DETAILS</b></p>
+    <hr>
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= form.label :weight %>
+        <%= form.text_field :weight, class: "form-control", placeholder: "Parcel weight"%>
+      </div>
+
+      <div class="col-md-4">
+        <%= form.label :status %>
+        <%= form.select :status, Parcel::STATUS, class: "form-control", placeholder: "Select parcel tatus"%>
+      </div>
+
+      <div class="col-md-4">
+        <%= form.label :service_type %>
+        <%= form.select :service_type_id, @service_types, class: "form-control", placeholder: "Select service type" %>
+      </div>
     </div>
+
+    <div class="form-group row">
+      <div class="col-md-4">
+        <%= form.label :payment_mode %>
+        <%= form.select :payment_mode, Parcel::PAYMENT_MODE, class: "form-control", placeholder: "Select payment mode" %>
+      </div>
+
+      <div class="col-md-4">
+        <%= form.label :cost %>
+        <%= form.text_field :cost, class: "form-control", placeholder: "Parcel cost" %>
+      </div>
+    </div>
+    <br/> <br/>
+    <p><b>SENDER DETAILS</b></p>
+    <hr>
+    <div class="form-group row">
+      <%= form.fields_for :sender do |sf|%>
+        <div class="col-md-4">
+          <%= sf.label :name %>
+          <%= sf.text_field :name, class: "form-control", placeholder: "Sender Name" %>
+        </div>
+
+        <div class="col-md-4">
+          <%= sf.label :email %>
+          <%= sf.text_field :email, class: "form-control", placeholder: "Sender email" %>
+        </div>
+
+        <%= sf.fields_for :address do |f| %>
+          <%= render 'addresses/address', form: f %>
+        <% end %>
+      <%end%>
+    </div>
+    <br/> <br/>
+    <p><b>RECEIVER DETAILS</b></p>
+    <hr>
+    <div class="form-group row">
+      <%= form.fields_for :reciever do |rf|%>
+        <div class="col-md-4">
+          <%= rf.label :name %>
+          <%= rf.text_field :name, class: "form-control", placeholder: "Sender Name" %>
+        </div>
+
+        <div class="col-md-4">
+          <%= rf.label :email %>
+          <%= rf.text_field :email, class: "form-control", placeholder: "Sender email" %>
+        </div>
+
+        <%= rf.fields_for :address do |f| %>
+          <%= render 'addresses/address', form: f %>
+        <% end %>
+      <%end%>
+    </div>
+    
+      <div class="col-md-4">
+        <%= form.submit "submit", class: "btn btn-success"%>
+      </div>
+    
   <% end %>
-
-  <div class="field">
-    <%= form.label :weight %>
-    <%= form.text_field :weight %>
-  </div>
-
-  <div class="field">
-    <%= form.label :status %>
-    <%= form.select :status, Parcel::STATUS %>
-  </div>
-
-  <div class="field">
-    <%= form.label :service_type_id %>
-    <%= form.select :service_type_id, @service_types %>
-  </div>
-
-  <div class="field">
-    <%= form.label :payment_mode %>
-    <%= form.select :payment_mode, Parcel::PAYMENT_MODE %>
-  </div>
-
-  <div class="field">
-    <%= form.label :sender_id %>
-    <%= form.select :sender_id, @users %>
-    <%= link_to 'New Sender', new_user_path %>
-  </div>
-
-  <div class="field">
-    <%= form.label :receiver_id %>
-    <%= form.select :receiver_id, @users %>
-    <%= link_to 'New Receiver', new_user_path %>
-  </div>
-
-  <div class="field">
-    <%= form.label :cost %>
-    <%= form.text_field :cost %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</div>
